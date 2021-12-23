@@ -16,9 +16,7 @@ def number_systems(x, y, z):
                 s += str(numb)
 
         else:
-
-            # alphabet = ['A' ,'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-            remains2, s = [], ''
+            remains2, s, stroch = [], '', ''
             while x >= z:
                 remains2.append(x % z)
                 x //= z
@@ -26,10 +24,9 @@ def number_systems(x, y, z):
             remains2.reverse()
             for rem in remains2:
                 if rem >= 10:
-                    stroch = ''
+                    ind = remains2.index(rem)
                     stroch += ascii_uppercase[rem - 10]
-                    remains2.remove(rem)
-            remains2.append(stroch)
+                    remains2[ind] = stroch[-1:]
             for numb in remains2:
                 s += str(numb)
 
@@ -37,7 +34,10 @@ def number_systems(x, y, z):
 
 
 if __name__ == "__main__":
-    x = int(input('переводимое число - '))
-    y = int(input('СС этого числа - '))
-    z = int(input('СС, в которую нужно перевести - '))
-    print(number_systems(x, y, z))
+    try:
+        x = int(input('переводимое число - '))
+        y = int(input('СС этого числа - '))
+        z = int(input('СС, в которую нужно перевести - '))
+        print(number_systems(x, y, z))
+    except ValueError:
+        print("Error: Invalid data type entered! Enter a number")
