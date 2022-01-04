@@ -32,43 +32,33 @@ def number_systems(x, y, z):
 
     elif z == 10:
 
-        ind, ind2, data, data2, s = [], [], [], [], 0
-
-        for index1 in range(len(str(x))):
-            ind.append(index1)
-        ind.reverse()
-
-        for index1 in range(len(str(x))):
-            ind2.append(index1)
-
-        for i in str(x):
-            data.append(i)
-
-        for num in ind:
-            data2.append(y ** num)
-
-        for num2 in ind2:
-            s += data2[num2] * int(data[num2])
+        s = 0
+        # index1 = [index for index in range(len(str(x)))]
+        index1 = list(map(lambda index: index, len(str(x))))
+        index1.reverse()
+        # index2 = [index for index in range(len(str(x)))]
+        index2 = list(map(lambda index: index, len(str(x))))
+        # data1 = [i for i in str(x)]
+        data1 = list(map(lambda i: i, str(x)))
+        # data2 = [y ** num for num in index1]
+        data2 = list(map(lambda num: y ** num, index1))
+        for num2 in index2:
+            s += data2[num2] * int(data1[num2])
 
     else:
 
-        index, index2, data, data2, s = [], [], [], [], 0
-
-        for index1 in range(len(str(x))):
-            index.append(index1)
-        index.reverse()
-
-        for index1 in range(len(str(x))):
-            index2.append(index1)
-
-        for i in str(x):
-            data.append(i)
-
-        for num in index:
-            data2.append(y ** num)
-
+        s = 0
+        # index1 = [index for index in range(len(str(x)))]
+        index1 = list(map(lambda index: index, len(str(x))))
+        index1.reverse()
+        # index2 = [index for index in range(len(str(x)))]
+        index2 = list(map(lambda index: index, len(str(x))))
+        # data1 = [i for i in str(x)]
+        data1 = list(map(lambda i: i, str(x)))
+        # data2 = [y ** num for num in index1]
+        data2 = list(map(lambda num: y ** num, index1))
         for num2 in index2:
-            s += data2[num2] * int(data[num2])
+            s += data2[num2] * int(data1[num2])
 
         x = s
         y = 10
