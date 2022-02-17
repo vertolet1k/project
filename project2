@@ -1,0 +1,31 @@
+import tkinter as tk
+
+
+# def transleter():
+#     numb = '1010'
+#     for number in range(len(numb)):
+#         text['text'] += numb[number]
+
+window = tk.Tk()
+window.geometry('500x500')
+entre1 = tk.Entry()
+
+def transleter():
+    numb = entre1.get()
+    # a = 10
+    # b = 100
+    b = 0.4
+    for number in range(len(numb)):
+        text = tk.Label(font='Times 30', text = '')
+        text['text'] = entre1.get()[int(number)]
+        # text.place(x = a, y = b, anchor="c")
+        text.place(relx=b, rely=0.5, anchor="c", height=30, width=30)
+        # text.pack(side = tk.TOP)
+        b += 0.09
+        # a += 25
+
+
+button = tk.Button(text = 'перевести', command=transleter)
+entre1.pack()
+button.pack()
+window.mainloop()
