@@ -1,31 +1,109 @@
 import tkinter as tk
-
-
-# def transleter():
-#     numb = '1010'
-#     for number in range(len(numb)):
-#         text['text'] += numb[number]
+from string import digits, ascii_uppercase
 
 window = tk.Tk()
-window.geometry('500x500')
-entre1 = tk.Entry()
+window.configure(bg='light steel blue')
+entry1 = tk.Entry(window, bg='bisque', font = ('Purisa', 20), justify = 'center')
+entry2 = tk.Entry(window, bg='bisque', font = ('Purisa', 20), justify = 'center')
+entry3 = tk.Entry(window, bg='bisque', font = ('Purisa', 20), justify = 'center')
+canvas = tk.Canvas(window, width = 450, height = 200, bg = 'white')
+canvas20 = tk.Canvas(window, width = 10000, height = 40, bg='light steel blue2')
+canvas30 = tk.Canvas(window, width = 10000, height = 40, bg='light steel blue2')
+canvas40 = tk.Canvas(window, width = 10000, height = 40, bg='light steel blue2')
+canvas50 = tk.Canvas(window, width = 10000, height = 40, bg='light steel blue2')
+canvas60 = tk.Canvas(window, width = 10000, height = 40, bg='light steel blue2')
+canvas70 = tk.Canvas(window, width = 10000, height = 40, bg='light steel blue2')
 
-def transleter():
-    numb = entre1.get()
-    # a = 10
-    # b = 100
-    b = 0.4
-    for number in range(len(numb)):
-        text = tk.Label(font='Times 30', text = '')
-        text['text'] = entre1.get()[int(number)]
-        # text.place(x = a, y = b, anchor="c")
-        text.place(relx=b, rely=0.5, anchor="c", height=30, width=30)
-        # text.pack(side = tk.TOP)
-        b += 0.09
-        # a += 25
+canvas30.pack()
+canvas1 = tk.Canvas(window, width = 920, height = 70, bg='GRAY65')
+canvas1.pack()
+canvas_id = canvas1.create_text(20, 20, text='', anchor=tk.NW, justify=tk.CENTER,
+                                font = ('Purisa', 14))
+test_string = "Моя программа поможет вам понять логику работы перевода из одной системы счисления в другую."
+delta = 150
+delay = 0
+for i in range(len(test_string) + 1):
+    s = test_string[:i]
+    update_text = lambda s=s: canvas1.itemconfigure(canvas_id, text=s)
+    canvas1.after(delay, update_text)
+    delay += delta
+
+canvas12 = tk.Canvas(window, width = 200, height = 100, bg='gray75')
+canvas20.pack()
+canvas12.pack()
+canvas_id = canvas_id = canvas12.create_text(20, 20, text='    ОТВЕТ:', justify=tk.CENTER,
+                                            anchor=tk.NW, font = ('Purisa', 20))
+
+canvas40.pack()
+canvas.pack()
+canvas50.pack()
+window.geometry('1000x1020')
+text1 = tk.Label(window, text = 'ЧИСЛО', background='papaya whip',
+                font = ('Purisa', 13))
+text2 = tk.Label(window, text = 'СС ЧИСЛА', background='papaya whip', 
+                font = ('Purisa', 13))
+text3 = tk.Label(window, text = 'СС В КОТОРУЮ НУЖНО ПЕРЕВЕСТИ', 
+                background='papaya whip', font = ('Purisa', 13))
 
 
-button = tk.Button(text = 'перевести', command=transleter)
-entre1.pack()
-button.pack()
+def tr():
+    canvas.delete("all")
+    from_base, to_base = int(entry2.get()), int(entry3.get())
+    n0 = int(entry1.get(), from_base)
+    n = n0
+    alphabet, res = digits + ascii_uppercase, ''
+    while n > 0:
+        n, m = n // to_base, n % to_base
+        res += alphabet[m]
+    canvas_id = canvas.create_text(20, 20, text='', anchor=tk.NW,
+                                   font = ('Purisa', 70), width = 1000)
+
+    def to_k(n):
+        to_base = int(entry3.get())
+        alphabet, res = digits + ascii_uppercase, ''
+        while n > 0:
+            n, m = n // to_base, n % to_base
+            res += alphabet[m]
+        return res[::-1]
+
+    delta = 500
+    delay = 0
+    for i in range(n0 + 1):
+        x = to_k(i)
+        update_text = lambda row=x: canvas.itemconfigure(canvas_id, text=row)
+        canvas.after(delay, update_text)
+        delay += delta
+
+def expl():
+    canvas2 = tk.Canvas(window, width = 900, height = 70, bg='GRAY65')
+    canvas2.delete("all")
+    canvas2.pack()
+    canvas70.pack()
+    canvas_id = canvas2.create_text(20, 20, text='', anchor=tk.NW, font = ('Purisa', 15))
+    test_string = "Как видите, логика перевода достаточно проста, ее можно сравнить с работой счетчиков."
+    delta = 150
+    delay = 0
+    for i in range(len(test_string) + 1):
+        s = test_string[:i]
+        update_text = lambda s=s: canvas2.itemconfigure(canvas_id, text=s)
+        canvas2.after(delay, update_text)
+        delay += delta
+
+canvas50.pack()
+button1 = tk.Button(text = 'пояснение', command = expl, relief='raised', 
+                    background='burlywood', font = ('Purisa', 15))
+button2 = tk.Button(text = 'перевести', command = tr, relief='raised', 
+                    background='burlywood', font = ('Purisa', 15))
+text1.pack()
+entry1.pack()
+text2.pack()
+entry2.pack()
+text3.pack()
+entry3.pack()
+button2.pack()
+button1.pack()
+canvas60.pack()
 window.mainloop()
+
+    
+
